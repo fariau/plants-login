@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Plant &amp; Co. | Login</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+    <!-- Apni 4 photos "images" folder mein rakhein: plant1.jpg, plant2.jpg, plant3.jpg, plant4.jpg -->
+    <style>
+        :root {
+            --bg: #e8efe9;
+            --card: #ffffff;
+            --ink: #111218;
+            --muted: #6b6f80;
+            --line: #cfd3e0;
+            --accent: #1f7a4d;
+            --accent2: #4cbf7a;
+            --focus: #1f9d5c;
+            box-sizing: border-box;
+            padding-top: env(safe-area-inset-top, 0px);
+            padding-bottom: env(safe-area-inset-bottom, 0px);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) {
+                --bg: #14151c;
+                --card: #1d1f29;
+                --ink: #f2f3f8;
+                --muted: #9a9eb2;
+                --line: #3a3d4e;
+            }
+        }
+
+        :root[data-theme="dark"] {
+            --bg: #14151c;
+            --card: #1d1f29;
+            --ink: #f2f3f8;
+            --muted: #9a9eb2;
+            --line: #3a3d4e;
+        }
+
+        html {
+            scroll-padding-top: env(safe-area-inset-top, 0px)
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        [hidden] {
+            display: none !important
+        }
+
+        html,
+        body {
+            height: 100%
+        }
+
+        body {
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            background: var(--bg);
+            color: var(--ink);
+            font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif
+        }
+
+        .card {
+            width: min(1000px, 100%);
+            height: min(560px, 100%);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            background: var(--card);
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 30px 70px rgba(40, 40, 90, .18)
+        }
+
+        .left {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 26px 30px;
+            min-height: 0;
+            overflow-y: auto
+        }
+
+        .top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 20px;
+            letter-spacing: -.02em
+        }
+
+        form {
+            margin: auto;
+            width: min(300px, 100%);
+            padding: 30px 0
+        }
+
+        .hello {
+            margin: 0;
+            text-align: center;
+            font-size: 12px;
+            color: var(--muted)
+        }
+
+        h1 {
+            margin: 4px 0 26px;
+            text-align: center;
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: -.02em
+        }
+
+        .field {
+            margin-bottom: 18px
+        }
+
+        .field label {
+            display: block;
+            font-size: 11px;
+            color: var(--muted);
+            margin-bottom: 2px
+        }
+
+        .field input {
+            width: 100%;
+            padding: 7px 0;
+            border: 0;
+            border-bottom: 2px solid var(--line);
+            background: transparent;
+            color: var(--ink);
+            font: 500 14px "Poppins", system-ui, sans-serif;
+            outline: none;
+            transition: border-color .2s
+        }
+
+        .field input:focus {
+            border-bottom-color: var(--focus)
+        }
+
+        .field input::placeholder {
+            color: var(--muted);
+            opacity: .45;
+            font-weight: 400
+        }
+
+        .field input:focus-visible {
+            outline: 2px solid var(--focus);
+            outline-offset: 3px
+        }
+
+        .btn {
+            width: 100%;
+            margin-top: 8px;
+            padding: 12px;
+            border: 0;
+            border-radius: 999px;
+            cursor: pointer;
+            color: #fff;
+            font: 600 14px "Poppins", system-ui, sans-serif;
+            background: linear-gradient(90deg, var(--accent), var(--accent2));
+            box-shadow: 0 8px 18px rgba(31, 122, 77, .3);
+            transition: transform .15s, box-shadow .15s
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 12px 22px rgba(31, 122, 77, .38)
+        }
+
+        .btn:focus-visible {
+            outline: 3px solid var(--focus);
+            outline-offset: 3px
+        }
+
+        .create {
+            display: block;
+            margin: 18px auto 0;
+            text-align: center;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--ink);
+            text-decoration: none
+        }
+
+        .create:hover {
+            text-decoration: underline
+        }
+
+        .msg {
+            min-height: 18px;
+            margin: 12px 0 0;
+            text-align: center;
+            font-size: 12px;
+            color: #d6336c
+        }
+
+        .msg.ok {
+            color: #1a9b5b
+        }
+
+        .foot {
+            font-size: 10px;
+            color: var(--muted);
+            text-align: center
+        }
+
+        /* carousel */
+        .right {
+            position: relative;
+            overflow: hidden;
+            background: #0d3b2a;
+            min-height: 0
+        }
+
+        .track {
+            display: flex;
+            height: 100%;
+            transition: transform .8s cubic-bezier(.65, 0, .25, 1)
+        }
+
+        .slide {
+            flex: 0 0 100%;
+            height: 100%
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover
+        }
+
+        .right::after {
+            content: "";
+            position: absolute;
+            inset: auto 0 0 0;
+            height: 45%;
+            background: linear-gradient(to top, rgba(0, 0, 0, .65), transparent);
+            pointer-events: none
+        }
+
+        .cap,
+        .who,
+        .dots {
+            z-index: 2
+        }
+
+        .cap {
+            position: absolute;
+            left: 24px;
+            right: 24px;
+            bottom: 56px;
+            color: #fff;
+            font-size: 19px;
+            font-weight: 700;
+            line-height: 1.3;
+            text-shadow: 0 2px 12px rgba(0, 0, 0, .45);
+            pointer-events: none
+        }
+
+        .who {
+            position: absolute;
+            left: 24px;
+            bottom: 22px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #fff;
+            font-size: 11px;
+            font-weight: 500
+        }
+
+        .who i {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ffd29a, #e9748f);
+            display: block
+        }
+
+        .dots {
+            position: absolute;
+            right: 22px;
+            bottom: 26px;
+            display: flex;
+            gap: 7px
+        }
+
+        .dots button {
+            width: 8px;
+            height: 8px;
+            padding: 0;
+            border: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, .5);
+            cursor: pointer;
+            transition: all .3s
+        }
+
+        .dots button[aria-current="true"] {
+            background: #fff;
+            width: 22px;
+            border-radius: 6px
+        }
+
+        .dots button:focus-visible {
+            outline: 2px solid #fff;
+            outline-offset: 3px
+        }
+
+        @media (max-width:760px) {
+            .card {
+                grid-template-columns: 1fr;
+                grid-template-rows: 32% 1fr
+            }
+
+            .right {
+                order: -1
+            }
+
+            .left {
+                padding: 14px 22px
+            }
+
+            form {
+                padding: 6px 0
+            }
+
+            h1 {
+                margin-bottom: 14px
+            }
+
+            .field {
+                margin-bottom: 12px
+            }
+
+            .foot {
+                display: none
+            }
+
+            .cap {
+                font-size: 14px;
+                bottom: 42px
+            }
+
+            .who {
+                bottom: 16px
+            }
+
+            .dots {
+                bottom: 20px
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            .track,
+            .btn,
+            .dots button {
+                transition: none
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main class="card">
+        <section class="left">
+            <div class="top">
+                <span class="logo">Plant &amp; Co.</span>
+            </div>
+
+            <form id="f" novalidate>
+                <p class="hello">Welcome back, plant lover!</p>
+                <h1>Login your account</h1>
+                <div class="field">
+                    <label for="email">Email</label>
+                    <input id="email" type="email" autocomplete="email" placeholder="hello@plantandco.com" required>
+                </div>
+                <div class="field">
+                    <label for="pw">Password</label>
+                    <input id="pw" type="password" autocomplete="current-password" placeholder="••••••••" required>
+                </div>
+                <button class="btn" type="submit">Login</button>
+                <p class="msg" id="msg" role="status"></p>
+                <a class="create" href="#signup" id="toSignup">Create New Account</a>
+            </form>
+
+            <form id="sf" novalidate hidden>
+                <p class="hello">Welcome, plant lover!</p>
+                <h1>Create your account</h1>
+                <div class="field">
+                    <label for="sname">Full name</label>
+                    <input id="sname" type="text" autocomplete="name" placeholder="Faria Usman" required>
+                </div>
+                <div class="field">
+                    <label for="semail">Email</label>
+                    <input id="semail" type="email" autocomplete="email" placeholder="hello@plantandco.com" required>
+                </div>
+                <div class="field">
+                    <label for="spw">Password</label>
+                    <input id="spw" type="password" autocomplete="new-password" placeholder="At least 6 characters"
+                        required>
+                </div>
+                <button class="btn" type="submit">Create account</button>
+                <p class="msg" id="smsg" role="status"></p>
+                <a class="create" href="#login" id="toLogin">Already have an account? Login</a>
+            </form>
+
+            <div class="foot">© 2026 Plant &amp; Co. All rights reserved</div>
+        </section>
+
+        <section class="right" aria-label="Highlights">
+            <div class="track" id="track">
+                <div class="slide"><img src="images/plant1.jpg" alt="Plant photo 1"></div>
+                <div class="slide"><img src="images/plant2.jpg" alt="Plant photo 2"></div>
+                <div class="slide"><img src="images/plant3.jpg" alt="Plant photo 3"></div>
+                <div class="slide"><img src="images/plant4.jpg" alt="Plant photo 4"></div>
+            </div>
+            <p class="cap">Bring a little green into your home,<br>one plant at a time.</p>
+            <div class="dots" id="dots"></div>
+        </section>
+    </main>
+
+    <script>
+        (function () {
+            var track = document.getElementById('track'), dotsEl = document.getElementById('dots');
+            var n = track.children.length, i = 0, timer = null;
+            var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            for (var k = 0; k < n; k++) {
+                (function (k) {
+                    var b = document.createElement('button');
+                    b.type = 'button'; b.setAttribute('aria-label', 'Show slide ' + (k + 1));
+                    b.addEventListener('click', function () {go(k); restart();});
+                    dotsEl.appendChild(b);
+                })(k);
+            }
+            function go(x) {
+                i = (x + n) % n;
+                track.style.transform = 'translateX(-' + (i * 100) + '%)';
+                Array.prototype.forEach.call(dotsEl.children, function (b, j) {
+                    b.setAttribute('aria-current', j === i ? 'true' : 'false');
+                });
+            }
+            function restart() {
+                if (reduce) return;
+                clearInterval(timer);
+                timer = setInterval(function () {go(i + 1);}, 3500);
+            }
+            go(0); restart();
+
+            var f = document.getElementById('f'), msg = document.getElementById('msg');
+            var sf = document.getElementById('sf'), smsg = document.getElementById('smsg');
+            function show(v) {
+                var s = (v === 'signup');
+                f.hidden = s; sf.hidden = !s; msg.textContent = ''; smsg.textContent = '';
+                try {history.replaceState(null, '', '#' + v);} catch (e) { }
+                var first = (s ? sf : f).querySelector('input'); if (first) first.focus();
+            }
+            document.getElementById('toSignup').addEventListener('click', function (e) {e.preventDefault(); show('signup');});
+            document.getElementById('toLogin').addEventListener('click', function (e) {e.preventDefault(); show('login');});
+            sf.addEventListener('submit', function (e) {
+                e.preventDefault();
+                var nm = document.getElementById('sname').value.trim();
+                var em = document.getElementById('semail').value.trim();
+                var p1 = document.getElementById('spw').value;
+                smsg.className = 'msg';
+                if (nm.length < 2) {smsg.textContent = 'Enter your full name.'; return;}
+                if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)) {smsg.textContent = 'Enter a valid email address.'; return;}
+                if (p1.length < 6) {smsg.textContent = 'Password must be at least 6 characters.'; return;}
+                smsg.className = 'msg ok';
+                smsg.textContent = 'Account created. Taking you to login...';
+                setTimeout(function () {
+                    sf.reset(); show('login');
+                    document.getElementById('email').value = em;
+                    msg.className = 'msg ok'; msg.textContent = 'Account created. Login to continue.';
+                }, 1200);
+            });
+            if (location.hash === '#signup') {show('signup');}
+            f.addEventListener('submit', function (e) {
+                e.preventDefault();
+                var em = document.getElementById('email').value.trim();
+                var pw = document.getElementById('pw').value;
+                msg.className = 'msg';
+                if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)) {msg.textContent = 'Enter a valid email address.'; return;}
+                if (pw.length < 6) {msg.textContent = 'Password must be at least 6 characters.'; return;}
+                msg.className = 'msg ok';
+                msg.textContent = 'Logged in. Welcome back!';
+            });
+        })();
+    </script>
+</body>
+
+</html>
